@@ -15,7 +15,13 @@ module UsefulRenderers
       return join(',') unless klass.respond_to? :column_names
 
       columns = klass.column_names
-      columns &= options[:only].map(&:to_s)        if options[:only]
+      if options[:only]
+        columns = []
+        options[:only].each do |method|
+          columns << method.to_s if first.respond_to?(method)
+        end
+      end
+
       columns -= options[:except].map(&:to_s)      if options[:except]
       columns += options[:add_methods].map(&:to_s) if options[:add_methods]
 

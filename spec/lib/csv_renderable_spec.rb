@@ -44,12 +44,21 @@ describe UsefulRenderers::CsvRenderable do
       end
     end
 
+    context 'options with :only param including methods' do
+      it 'returns only columns specified' do
+        options = { only: [:name, :human_age] }
+
+        expect(csv_renderable_array.to_csv(options))
+          .to eql "name,human_age\nO'Connor,25\nRuby,25\nShelby,33\n"
+      end
+    end
+
     context 'options with :exclude param' do
       it 'excludes columns specified' do
         options = { except: [:age] }
 
         expect(csv_renderable_array.to_csv(options))
-          .to eql "id,name,weight\n7,O'Connor,76.8\n8,Ruby,68.2\n9,Shelby,64.0\n"
+          .to eql "id,name,weight\n#{sebastian.id},O'Connor,76.8\n#{ruby.id},Ruby,68.2\n#{shelby.id},Shelby,64.0\n"
       end
     end
 
@@ -58,7 +67,7 @@ describe UsefulRenderers::CsvRenderable do
         options = { add_methods: [:human_age] }
 
         expect(csv_renderable_array.to_csv(options))
-          .to eql "id,name,age,weight,human_age\n10,O'Connor,3,76.8,25\n11,Ruby,3,68.2,25\n12,Shelby,5,64.0,33\n"
+          .to eql "id,name,age,weight,human_age\n#{sebastian.id},O'Connor,3,76.8,25\n#{ruby.id},Ruby,3,68.2,25\n#{shelby.id},Shelby,5,64.0,33\n"
       end
     end
 
@@ -75,7 +84,7 @@ describe UsefulRenderers::CsvRenderable do
       it 'translate header with human_attribute_name' do
         options = { only: [:id, :name], translate: true }
         expect(csv_renderable_array.to_csv(options))
-          .to eql "Id,Dog name\n16,O'Connor\n17,Ruby\n18,Shelby\n"
+          .to eql "Id,Dog name\n#{sebastian.id},O'Connor\n#{ruby.id},Ruby\n#{shelby.id},Shelby\n"
       end
     end
   end
