@@ -1,10 +1,9 @@
 # UsefulRenderers
 
-<!-- [![Build Status](https://travis-ci.org/beerlington/render_csv.png?branch=master)](https://travis-ci.org/beerlington/render_csv)
-[![Gem Version](https://badge.fury.io/rb/render_csv.png)](http://badge.fury.io/rb/render_csv)
-[![Code Climate](https://codeclimate.com/github/beerlington/render_csv.png)](https://codeclimate.com/github/beerlington/render_csv)
-[![Dependency Status](https://gemnasium.com/beerlington/render_csv.png)](https://gemnasium.com/beerlington/render_csv)
- -->
+[![Gem Version](https://badge.fury.io/rb/useful_renderers.svg)](http://badge.fury.io/rb/useful_renderers)
+[![Code Climate](https://codeclimate.com/github/blueberryapps/useful_renderers/badges/gpa.svg)](https://codeclimate.com/github/blueberryapps/useful_renderers)
+[![Dependency Status](https://gemnasium.com/blueberryapps/useful_renderers.svg)](https://gemnasium.com/blueberryapps/useful_renderers)
+
 Rails renderers
 
 - CSV renderer for ActiveRecord collections
@@ -107,7 +106,7 @@ end
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/useful_renderers/fork )
+1. Fork it ( https://github.com/blueberryapps/useful_renderers/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
