@@ -14,7 +14,7 @@ module UsefulRenderers
         send_data data, type: Mime::CSV, disposition: "attachment; filename=#{filename}.csv"
       end
 
-      ActionController.add_renderer :csv do |csv, options|
+      ActionController.add_renderer :zip do |csv, options|
         filename = options[:filename] || options[:template]
         csv.extend UsefulRenderers::ZipRenderable
         data = csv.respond_to?(:to_zip) ? csv.to_csv(options) : csv
