@@ -18,7 +18,7 @@ module UsefulRenderers
         filename = options[:filename] || options[:template]
         zip.extend UsefulRenderers::ZipRenderable
         data = zip.respond_to?(:to_zip) ? zip.to_zip(options) : zip
-        send_data data, type: Mime::Zip, disposition: "attachment; filename=#{filename}.zip"
+        send_data data, type: 'application/zip', disposition: "attachment; filename=#{filename}.zip"
       end
 
     end
