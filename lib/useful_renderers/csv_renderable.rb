@@ -5,25 +5,17 @@ module UsefulRenderers
 
     # Converts an array to CSV formatted string
     # Options include:
-    # :only => [:col1, :col2] # Specify which columns to include
+    # :only => [:col1, :col2]   # Specify which columns to include
     # :except => [:col1, :col2] # Specify which columns to exclude
-    # :add_methods => [:method1, :method2] # Include addtional methods that aren't columns
+    # :translate => boolean     # Translate headers
 
     def to_csv(options = {})
       klass = first.class
       return '' if empty?
       return join(',') unless klass.respond_to? :column_names
 
-      columns = klass.column_names
-      if options[:only]
-        columns = []
-        options[:only].each do |method|
-          columns << method.to_s if first.respond_to?(method)
-        end
-      end
-
-      columns -= options[:except].map(&:to_s)      if options[:except]
-      columns += options[:add_methods].map(&:to_s) if options[:add_methods]
+      columns = options[:only] ? options[:only].map(&:to_s) : klass.column_names
+      columns -= options[:except].map(&:to_s) if options[:except]
 
       headers = columns.dup
       headers.map!{|col| klass.human_attribute_name col } if options[:translate]
@@ -36,7 +28,9 @@ module UsefulRenderers
 
       CSV.generate(csv_options) do |row|
         self.each do |obj|
-          row << columns.map { |c| obj.send(c) }
+          row << columns.map do |column|
+            column.to_s.split('.').inject(obj) { |o, m| o.try(m) }
+          end
         end
       end
     end
