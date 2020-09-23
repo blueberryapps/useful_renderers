@@ -83,23 +83,17 @@ end
 
 ```ruby
 respond_to do |format|
-  format.csv  { render csv: @locations, only: [:address, :zip] }
+  format.csv  { render csv: @locations, only: [:address, :zip, 'country.state'] }
 end
 ```
 
-### Add methods as columns
+### Translate headers
+
+Using `Class.human_attribute_name(column_name)`
 
 ```ruby
 respond_to do |format|
-  format.csv  { render csv: @locations, add_methods: [:method1, :method2] }
-end
-```
-
-### Add methods as columns and exclude columns
-
-```ruby
-respond_to do |format|
-  format.csv  { render csv: @locations, except: [:id], add_methods: [:method1, :method2] }
+  format.csv  { render csv: @locations, translate: true }
 end
 ```
 
